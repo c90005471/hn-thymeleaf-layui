@@ -1,0 +1,36 @@
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "authorityId": 1,
+      "authorityName": "系统管理",
+      "menuUrl": null,
+      "authority": null,
+      "parentId": 0,
+      "open": true
+    },
+    {
+      "authorityId": 2,
+      "authorityName": "用户管理",
+      "menuUrl": "system/user",
+      "authority": null,
+      "parentId": 1,
+      "open": true
+    },
+    {
+      "authorityId": 3,
+      "authorityName": "查询用户",
+      "menuUrl": "",
+      "authority": "user:view",
+      "parentId": 2
+    },
+    {
+      "authorityId": 4,
+      "authorityName": "添加用户",
+      "menuUrl": null,
+      "authority": "user:add",
+      "parentId": 2
+    }
+  ]
+}

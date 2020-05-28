@@ -1,0 +1,232 @@
+[
+  {
+    "title": "系统管理",
+    "id": 1,
+    "field": null,
+    "checked": false,
+    "spread": false,
+    "children": [
+      {
+        "title": "用户管理",
+        "id": 100,
+        "field": null,
+        "checked": false,
+        "spread": false,
+        "children": [
+          {
+            "title": "用户查询",
+            "id": 1000,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          },
+          {
+            "title": "用户新增",
+            "id": 1001,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          },
+          {
+            "title": "用户修改",
+            "id": 1002,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          },
+          {
+            "title": "用户删除",
+            "id": 1003,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          },
+          {
+            "title": "用户导出",
+            "id": 1004,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          },
+          {
+            "title": "重置密码",
+            "id": 1005,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          }
+        ]
+      },
+      {
+        "title": "角色管理",
+        "id": 101,
+        "field": null,
+        "checked": false,
+        "spread": false,
+        "children": [
+          {
+            "title": "角色查询",
+            "id": 1006,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          },
+          {
+            "title": "角色新增",
+            "id": 1007,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          },
+          {
+            "title": "角色修改",
+            "id": 1008,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          },
+          {
+            "title": "角色删除",
+            "id": 1009,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          },
+          {
+            "title": "角色导出",
+            "id": 1010,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          }
+        ]
+      },
+      {
+        "title": "菜单管理",
+        "id": 102,
+        "field": null,
+        "checked": false,
+        "spread": false,
+        "children": [
+          {
+            "title": "菜单查询",
+            "id": 1011,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          },
+          {
+            "title": "菜单新增",
+            "id": 1012,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          },
+          {
+            "title": "菜单修改",
+            "id": 1013,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          },
+          {
+            "title": "菜单删除",
+            "id": 1014,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          }
+        ]
+      },
+      {
+        "title": "部门管理",
+        "id": 103,
+        "field": null,
+        "checked": false,
+        "spread": false,
+        "children": [
+          {
+            "title": "部门查询",
+            "id": 1015,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          },
+          {
+            "title": "部门新增",
+            "id": 1016,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          },
+          {
+            "title": "部门修改",
+            "id": 1017,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          },
+          {
+            "title": "部门删除",
+            "id": 1018,
+            "field": null,
+            "checked": false,
+            "spread": false,
+            "children": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "系统监控",
+    "id": 2,
+    "field": null,
+    "checked": false,
+    "spread": false,
+    "children": [
+      {
+        "title": "在线用户",
+        "id": 109,
+        "field": null,
+        "checked": false,
+        "spread": false,
+        "children": null
+      },
+      {
+        "title": "数据监控",
+        "id": 111,
+        "field": null,
+        "checked": false,
+        "spread": false,
+        "children": null
+      },
+      {
+        "title": "服务监控",
+        "id": 112,
+        "field": null,
+        "checked": false,
+        "spread": false,
+        "children": null
+      }
+    ]
+  }
+]

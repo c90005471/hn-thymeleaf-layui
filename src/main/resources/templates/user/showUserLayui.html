@@ -1,0 +1,231 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery-1.10.2.js}"></script>
+    <script th:src="@{/layui/layui.all.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+</head>
+<body>
+<table id="demo" lay-filter="test"></table>
+<script type="text/html" id="mytoolbar">
+    <button type="button" class="layui-btn layui-btn-sm" lay-event="saveUser"><i class="layui-icon layui-icon-addition"></i>添加</button>
+    <button type="button" class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delUser"><i class="layui-icon layui-icon-delete"></i>删除</button>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<form class="layui-form" action="" id="userSaveForm" style="display: none">
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户名</label>
+        <div class="layui-input-block">
+            <input type="text" name="username" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">密  码</label>
+        <div class="layui-input-block">
+            <input type="text" name="password" required  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="button"  	class="layui-btn layui-btn-normal" lay-submit lay-filter="saveUserForm">保存</button>
+            <button type="reset"  	class="layui-btn layui-btn-warm">重置</button>
+        </div>
+    </div>
+
+</form>
+<form class="layui-form" action="" id="userEditForm" style="display: none">
+    <input type="hidden" id="userid" name="userid" >
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户名</label>
+        <div class="layui-input-block">
+            <input type="text" id="username" name="username" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="button"  	class="layui-btn layui-btn-normal" lay-submit lay-filter="editUserForm">修改</button>
+            <button type="reset"  	class="layui-btn layui-btn-warm">重置</button>
+        </div>
+    </div>
+
+</form>
+</body>
+<script>
+    var form=layui.form;
+    var table=layui.table;
+    form.render();//渲染表单
+        //第一个实例
+       var myTable= table.render({
+            elem: '#demo'
+            ,height: 350
+            ,url: 'showUserLayui' //数据接口
+            ,page: true //开启分页
+            ,limit:6
+            ,limits:[5,10,15,20,25,30]
+            ,toolbar: '#mytoolbar' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            ,cols: [
+                [ //表头
+                {field: 'userid', title: '用户编号', width:80, sort: true, fixed: 'left',checkbox: true}
+                ,{field: 'userid', title: '用户编号', width:120, sort: true, fixed: 'left'}
+                ,{field: 'username', title: '用户名', width:120}
+                ,{field: 'password', title: '密码', width:200, sort: true}
+                ,{ title: '操作', width:200, toolbar: '#barDemo'}
+            ]]
+        });
+        //监听头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id)
+                ,data = checkStatus.data; //获取选中的数据
+            var ids=[];
+            switch(obj.event){
+                case 'saveUser':
+                    layer.open(
+                        {
+                            type: 1,
+                            content: $("#userSaveForm"),
+                            icon: 1,
+                            title:"添加用户",
+                            area: ['450px', '200px']
+                        }
+                    )
+                    break;
+                case 'update':
+                    if(data.length === 0){
+                        layer.msg('请选择一行');
+                    } else if(data.length > 1){
+                        layer.msg('只能同时编辑一个');
+                    } else {
+                        layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
+                    }
+                    break;
+                case 'delUser':
+                    if(data.length === 0){
+                        layer.msg('请选择一行');
+                    } else {
+                        console.log(data)
+                        layer.confirm('确定要删除吗?', function(index){
+                            //获取所有需要删除的userid，保存在ids的数组中
+                           for(var i=0;i<data.length;i++){
+                               ids.push(data[i].userid);
+                           }
+                            $.ajax({
+                                url: 'delUser',//地址
+                                dataType: 'json',//数据类型
+                                type: 'POST',//类型
+                                data:{ids:JSON.stringify(ids)},//将数组ids转换成json字符串
+                                //请求成功
+                                success: function (result) {
+                                    if(result.code==0){
+                                        //关闭弹出层
+                                        layer.close(index);
+                                        //显示删除成功消息
+                                        layer.msg(result.message,{icon:1})
+                                        //重新加载数据表格
+                                        myTable.reload();
+                                    }else
+                                    {
+                                        //关闭弹出层
+                                        layer.close(index);
+                                        layer.msg(result.message,{icon:5})
+                                    }
+                                }
+                            });
+
+                        });
+                    }
+                    break;
+            };
+        });
+    //监听提交
+    form.on('submit(saveUserForm)', function(data){
+        //数据的提交，ajax方式
+        console.log(data.field)
+        $.ajax({
+            url: 'saveUser',//地址
+            dataType: 'json',//数据类型
+            type: 'POST',//类型
+            data:data.field,
+            //请求成功
+            success: function (result) {
+                if(result.code==0){
+                    //关闭弹出层
+                    layer.closeAll();
+                    //显示添加成功消息
+                    layer.msg(result.message,{icon:1})
+                    //重新加载数据表格
+                    myTable.reload();
+                }else
+                {
+                    //关闭弹出层
+                    layer.closeAll();
+                    layer.msg(result.message,{icon:5})
+                }
+            }
+        });
+        return false;
+    });
+    form.on('submit(editUserForm)', function(data){
+        //数据的提交，ajax方式
+        console.log(data.field)
+        $.ajax({
+            url: 'editUser',//地址
+            dataType: 'json',//数据类型
+            type: 'POST',//类型
+            data:data.field,
+            //请求成功
+            success: function (result) {
+                if(result.code==0){
+                    //关闭弹出层
+                    layer.closeAll();
+                    //显示添加成功消息
+                    layer.msg(result.message,{icon:1})
+                    //重新加载数据表格
+                    myTable.reload();
+                }else
+                {
+                    //关闭弹出层
+                    layer.closeAll();
+                    layer.msg(result.message,{icon:5})
+                }
+            }
+        });
+        return false;
+    });
+    //监听行工具事件
+    table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+        var data = obj.data //获得当前行数据
+            ,layEvent = obj.event; //获得 lay-event 对应的值
+        if(layEvent === 'detail'){
+            layer.msg('查看操作');
+        } else if(layEvent === 'del'){
+            layer.confirm('真的删除行么', function(index){
+                obj.del(); //删除对应行（tr）的DOM结构
+                layer.close(index);
+                //向服务端发送删除指令
+            });
+        } else if(layEvent === 'edit'){
+            layer.msg('编辑操作');
+            //填充修改用户的表单项
+            console.log(data);
+            $("#username").val(data.username);
+            $("#userid").val(data.userid);
+            layer.open(
+                {
+                    type: 1,
+                    content: $("#userEditForm"),
+                    icon: 1,
+                    title:"修改用户",
+                    area: ['450px', '200px']
+                }
+            )
+        }
+    });
+
+</script>
+</html>

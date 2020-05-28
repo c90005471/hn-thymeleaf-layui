@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>AAA通用后台权限管理系统</title>
+    <meta name="keywords" content="AAA通用后台权限管理系统">
+    <meta name="description" content="AAA通用后台权限管理系统">
+    <link rel="shortcut icon" th:href="@{img/favicon.ico}"/>
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{css/login.css}" rel="stylesheet"/>
+    <!-- 全局js -->
+    <script th:src="@{/js/jquery-1.10.2.js}"></script>
+
+</head>
+<body class="signin">
+<div class="signinpanel">
+    <div class="row">
+        <div class="col-sm-7">
+            <div class="signin-info">
+                <div class="logopanel m-b">
+                    <h2>AAA通用后台权限管理系统</h2>
+                </div>
+                <div class="m-b"></div>
+                <h4>欢迎使用 <strong>AAA通用后台权限管理系统</strong></h4>
+                <ul class="m-b">
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> SpringBoot</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Mybatis</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Shiro</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Thymeleaf</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> LayUi</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-5" id="loginForm">
+            <form id="signupForm" action="login" method="post" onsubmit="return checkNull()">
+                <h4 class="no-margins">登录：</h4>
+                <span th:text="${message}" style="color: red"></span>
+                <p class="m-t-md"></p>
+                <input type="text" name="username" id="username" class="form-control uname" placeholder="用户名" value="root2"/>
+                <input type="password" name="password" id="password" class="form-control pword" placeholder="密码" value="root2"/>
+                <input type="submit" value="登录" class="btn btn-success btn-block" id="btnSubmit"
+                       data-loading="正在验证登录，请稍后..."/>
+            </form>
+        </div>
+    </div>
+    <div class="signup-footer">
+        <div class="pull-left">
+            &copy; 2020 All Rights Reserved. AAA Software <br>
+            <a href="https://www.toutiao.com/c/user/59325412265/#mid=1589186466669581" target="_blank" rel="nofollow">关注我的头条</a><br>
+        </div>
+    </div>
+</div>
+<script>
+    //校验用户名和密码不能为空
+    function checkNull() {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        if (username == null || username == '') {
+            alert("用户名不能为空");
+            return false;
+        }
+        if (password == null || password == '') {
+            alert("密码不能为空");
+            return false;
+        }
+        return true;
+    }
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery-1.10.2.js}"></script>
+    <script th:src="@{/layui/layui.all.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+</head>
+<body>
+<div class="layui-btn-container">
+    <button type="button" class="layui-btn layui-btn-sm" lay-demo="getChecked">获取选中节点数据</button>
+    <button type="button" class="layui-btn layui-btn-sm" lay-demo="setChecked">勾选指定节点</button>
+    <button type="button" class="layui-btn layui-btn-sm" lay-demo="reload">重载实例</button>
+</div>
+
+<div id="test12" class="demo-tree-more"></div>
+</body>
+<script>
+
+
+    layui.use(['tree', 'util'], function(){
+
+        var tree = layui.tree
+            ,layer = layui.layer
+            ,util = layui.util
+
+        $.ajax({
+            url: 'selectAllMenu',//地址
+            dataType: 'json',//数据类型
+            type: 'GET',//类型
+            //请求成功
+            success: function (result) {
+                //基本演示
+                tree.render({
+                    elem: '#test12'
+                    ,data: result
+                    ,showCheckbox: true  //是否显示复选框
+                    ,id: 'demoId1'
+                    ,isJump: true //是否允许点击节点时弹出新窗口跳转
+                    ,click: function(obj){
+                        var data = obj.data;  //获取当前点击的节点数据
+                        layer.msg('状态：'+ obj.state + '<br>节点数据：' + JSON.stringify(data));
+                    }
+                });
+            }
+        });
+
+        //按钮事件
+        util.event('lay-demo', {
+            getChecked: function(othis){
+                var checkedData = tree.getChecked('demoId1'); //获取选中节点的数据
+
+                layer.alert(JSON.stringify(checkedData), {shade:0});
+                console.log(checkedData);
+            }
+            ,setChecked: function(){
+                tree.setChecked('demoId1', [12, 16]); //勾选指定节点
+            }
+            ,reload: function(){
+                //重载实例
+                tree.reload('demoId1', {
+
+                });
+
+            }
+        });
+    });
+</script>
+</html>
