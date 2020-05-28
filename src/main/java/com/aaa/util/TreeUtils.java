@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * 权限数据处理
+ * 树状菜单工具类
  * 
  * @author teacherChen
  */
