@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2020-05-28 16:29:19
+Date: 2020-05-29 16:46:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,7 +30,7 @@ CREATE TABLE `tbl_dept` (
   `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`dept_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='部门表';
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='部门表';
 
 -- ----------------------------
 -- Records of tbl_dept
@@ -62,17 +62,17 @@ CREATE TABLE `tbl_menu` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1055 DEFAULT CHARSET=utf8 COMMENT='菜单权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=1019 DEFAULT CHARSET=utf8 COMMENT='菜单权限表';
 
 -- ----------------------------
 -- Records of tbl_menu
 -- ----------------------------
-INSERT INTO `tbl_menu` VALUES ('1', '系统管理', '0', '1', '#', 'M', '0', '', 'fa fa-gear', 'admin', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', '系统管理目录');
-INSERT INTO `tbl_menu` VALUES ('2', '系统监控', '0', '2', '#', 'M', '0', '', 'fa fa-video-camera', 'admin', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', '系统监控目录');
-INSERT INTO `tbl_menu` VALUES ('100', '用户管理', '1', '1', '/system/user', 'C', '0', 'system:user:view', '#', 'admin', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', '用户管理菜单');
-INSERT INTO `tbl_menu` VALUES ('101', '角色管理', '1', '2', '/system/role', 'C', '0', 'system:role:view', '#', 'admin', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', '角色管理菜单');
-INSERT INTO `tbl_menu` VALUES ('102', '菜单管理', '1', '3', '/system/menu', 'C', '0', 'system:menu:view', '#', 'admin', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', '菜单管理菜单');
-INSERT INTO `tbl_menu` VALUES ('103', '部门管理', '1', '4', '/system/dept', 'C', '0', 'system:dept:view', '#', 'admin', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', '部门管理菜单');
+INSERT INTO `tbl_menu` VALUES ('1', '系统管理', '0', '1', '#', 'M', '0', '', 'layui-icon-set', 'admin', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', '系统管理目录');
+INSERT INTO `tbl_menu` VALUES ('2', '系统监控', '0', '2', '#', 'M', '0', '', 'layui-icon-camera-fill', 'admin', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', '系统监控目录');
+INSERT INTO `tbl_menu` VALUES ('100', '用户管理', '1', '1', '/user/toShowUser', 'C', '0', 'system:user:view', '#', 'admin', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', '用户管理菜单');
+INSERT INTO `tbl_menu` VALUES ('101', '角色管理', '1', '2', '/role/toShowRole', 'C', '0', 'system:role:view', '#', 'admin', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', '角色管理菜单');
+INSERT INTO `tbl_menu` VALUES ('102', '菜单管理', '1', '3', '/menu/toShowMenu', 'C', '0', 'system:menu:view', '#', 'admin', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', '菜单管理菜单');
+INSERT INTO `tbl_menu` VALUES ('103', '部门管理', '1', '4', '/dept/toShowDept', 'C', '0', 'system:dept:view', '#', 'admin', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', '部门管理菜单');
 INSERT INTO `tbl_menu` VALUES ('109', '在线用户', '2', '1', '/monitor/online', 'C', '0', 'monitor:online:view', '#', 'admin', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', '在线用户菜单');
 INSERT INTO `tbl_menu` VALUES ('111', '数据监控', '2', '3', '/monitor/data', 'C', '0', 'monitor:data:view', '#', 'admin', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', '数据监控菜单');
 INSERT INTO `tbl_menu` VALUES ('112', '服务监控', '2', '3', '/monitor/server', 'C', '0', 'monitor:server:view', '#', 'admin', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', '服务监控菜单');
@@ -135,6 +135,40 @@ CREATE TABLE `tbl_role_menu` (
 -- ----------------------------
 -- Records of tbl_role_menu
 -- ----------------------------
+INSERT INTO `tbl_role_menu` VALUES ('1', '1');
+INSERT INTO `tbl_role_menu` VALUES ('1', '2');
+INSERT INTO `tbl_role_menu` VALUES ('1', '100');
+INSERT INTO `tbl_role_menu` VALUES ('1', '101');
+INSERT INTO `tbl_role_menu` VALUES ('1', '102');
+INSERT INTO `tbl_role_menu` VALUES ('1', '103');
+INSERT INTO `tbl_role_menu` VALUES ('1', '109');
+INSERT INTO `tbl_role_menu` VALUES ('1', '111');
+INSERT INTO `tbl_role_menu` VALUES ('1', '112');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1000');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1001');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1002');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1003');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1004');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1005');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1006');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1007');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1008');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1009');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1010');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1011');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1012');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1013');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1014');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1015');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1016');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1017');
+INSERT INTO `tbl_role_menu` VALUES ('1', '1018');
+INSERT INTO `tbl_role_menu` VALUES ('2', '1');
+INSERT INTO `tbl_role_menu` VALUES ('2', '100');
+INSERT INTO `tbl_role_menu` VALUES ('2', '101');
+INSERT INTO `tbl_role_menu` VALUES ('2', '1001');
+INSERT INTO `tbl_role_menu` VALUES ('2', '1002');
+INSERT INTO `tbl_role_menu` VALUES ('2', '1003');
 
 -- ----------------------------
 -- Table structure for `tbl_user`
@@ -150,7 +184,7 @@ CREATE TABLE `tbl_user` (
   `sex` char(1) DEFAULT '0' COMMENT '用户性别（0男 1女 2未知）',
   `avatar` varchar(50) DEFAULT NULL,
   `password` varchar(50) DEFAULT '' COMMENT '密码',
-  `salt` varchar(20) DEFAULT '' COMMENT '盐加密',
+  `salt` varchar(50) DEFAULT '' COMMENT '盐加密',
   `status` char(1) DEFAULT '0' COMMENT '帐号状态（0正常 1停用）',
   `del_flag` char(1) DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
   `create_by` varchar(64) DEFAULT '' COMMENT '创建者',
@@ -164,9 +198,9 @@ CREATE TABLE `tbl_user` (
 -- ----------------------------
 -- Records of tbl_user
 -- ----------------------------
-INSERT INTO `tbl_user` VALUES ('1', '101', 'admin', '豆豆', '86521760@qq.com', '18538062907', '0', null, 'admin123', '111111', '0', '0', 'admin', '2018-03-16 11:33:00', 'admin', '2020-01-01 21:15:13', '管理员');
+INSERT INTO `tbl_user` VALUES ('1', '101', 'admin', '豆豆', '86521760@qq.com', '18538062907', '0', null, '280111d7f4fa14ff76606fe1ffa4d782', '9ed6610c-6132-4d0c-a8a4-5011080ba754', '0', '0', 'admin', '2018-03-16 11:33:00', 'admin', '2020-01-01 21:15:13', '管理员');
 INSERT INTO `tbl_user` VALUES ('3', '101', 'chenjian', '陈建', 'chenjian3822515@163.com', '18538062906', '0', null, 'f4a77e1417b03bf32d4b33a137282093', '4bd21f', '0', '0', 'admin', '2019-04-18 11:48:31', 'admin', '2019-08-07 12:31:29', '');
-INSERT INTO `tbl_user` VALUES ('4', '101', 'zhangsan', '张三', '86587432@qq.com', '18538062999', '0', null, '9da8d52c4a42978c876621546ccf298e', '6ac61b', '0', '0', 'admin', '2019-08-07 15:46:18', 'admin', '2019-08-07 16:24:29', '');
+INSERT INTO `tbl_user` VALUES ('4', '101', 'root2', '张三', '86587432@qq.com', '18538062999', '0', null, '3512abbc9c7c8daa4c3560e79f8d1858', '568629be-6ca4-46eb-baaf-f6fea4c23d74', '0', '0', 'admin', '2019-08-07 15:46:18', 'admin', '2019-08-07 16:24:29', '');
 INSERT INTO `tbl_user` VALUES ('5', '103', 'lihang', 'lihang', '7987954@qq.com', '17947934435', '0', null, '6d70551312e8167cb363020454a3ba03', 'f06b8d', '0', '0', 'admin', '2019-12-31 15:38:14', 'admin', '2020-01-01 21:02:55', '');
 
 -- ----------------------------
