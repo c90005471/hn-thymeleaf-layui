@@ -1,5 +1,6 @@
 package com.aaa.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -19,7 +20,7 @@ public class Role {
     private String delFlag;
 
     private String createBy;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private String updateBy;

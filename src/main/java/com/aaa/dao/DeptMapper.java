@@ -1,7 +1,13 @@
 package com.aaa.dao;
 
 import com.aaa.entity.Dept;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Mapper
+@Repository
 public interface DeptMapper {
     int deleteByPrimaryKey(Integer deptId);
 
@@ -14,4 +20,5 @@ public interface DeptMapper {
     int updateByPrimaryKeySelective(Dept record);
 
     int updateByPrimaryKey(Dept record);
+    List<Dept> selectAllDept();
 }

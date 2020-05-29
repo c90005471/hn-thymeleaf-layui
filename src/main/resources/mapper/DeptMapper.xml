@@ -22,7 +22,11 @@
     from tbl_dept
     where dept_id = #{deptId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectAllDept" resultMap="BaseResultMap">
+        select * from tbl_dept where del_flag=0
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbl_dept
     where dept_id = #{deptId,jdbcType=INTEGER}
   </delete>
