@@ -18,6 +18,7 @@ public class LayUiTree {
     private String field;
     private boolean checked;
     private boolean spread;
+    private String url;
     private List<LayUiTree> children;
 
 

@@ -2,6 +2,7 @@ package com.aaa.shiro;
 
 import com.aaa.biz.UserBiz;
 import com.aaa.entity.MyUserInfo;
+import com.aaa.entity.User;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -43,9 +44,7 @@ public class MyRealm  extends AuthorizingRealm {
         UsernamePasswordToken usernamePasswordToken= (UsernamePasswordToken) token;
         //登录验证分两个步骤，步骤一查询用户是否存在
         String username=usernamePasswordToken.getUsername();
-        //用户登录页面传入的密码
-        //String loginPassword=usernamePasswordToken.getUsername();
-        MyUserInfo userInfo = userBizImpl.selectUserByUsername(username);
+        User userInfo = userBizImpl.selectUserByUsername(username);
         if(null==userInfo){
             return null;
         }

@@ -31,7 +31,26 @@
       select * from tbl_menu
 
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
+    <select id="selectAllMenuByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+      SELECT
+	m.*
+FROM
+	tbl_menu m
+INNER JOIN tbl_role_menu rm ON m.menu_id = rm.menu_id
+WHERE
+	rm.role_id IN (
+		SELECT
+			ur.role_id
+		FROM
+			tbl_user u
+		INNER JOIN tbl_user_role ur ON ur.user_id = u.user_id
+		WHERE
+			u.login_name = #{loginName}
+	)
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbl_menu
     where menu_id = #{menuId,jdbcType=INTEGER}
   </delete>

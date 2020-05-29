@@ -17,6 +17,7 @@ public class MyConstants {
     public static final String  editFailMsg="修改失败";
     public static final String delSuccessMsg="删除成功";
     public static final String  delFailMsg="删除失败";
+    //加密算法
     public static final String algorithmName="MD5";
     //加密次数
     public static final   int hashIterations=1000;

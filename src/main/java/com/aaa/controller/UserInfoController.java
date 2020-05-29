@@ -1,9 +1,9 @@
 package com.aaa.controller;
 
 import com.aaa.biz.UserBiz;
+import com.aaa.biz.UserInfoBiz;
 import com.aaa.entity.LayUiTable;
 import com.aaa.entity.MyUserInfo;
-import com.aaa.entity.User;
 import com.aaa.util.MyConstants;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
@@ -13,31 +13,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 陈建
  * @Date: 2020/5/22 0022 15:32
  * @Version 1.0
- * 用户管理
+ * 用户测试
  */
-@Controller
-//此处的RequestMapping是窄化请求，1年级
-@RequestMapping("/user")
-public class UserController {
+//@Controller
+public class UserInfoController {
     @Autowired
-    private UserBiz userBizImpl;
+    private UserInfoBiz userBizImpl;
 
-    @RequestMapping("/toShowUser")
+    @RequestMapping("/toShowUserLayui")
     public String toShowUserLayui() {
-        return "user/showUser";
+        return "userinfo/showUserLayui";
     }
 
-    @RequestMapping("/showUser")
+    @RequestMapping("/showUserLayui")
     @ResponseBody
     public LayUiTable showUserLayui(int page, int limit) {
         //开始查询
-        PageInfo<User> pageInfo = userBizImpl.selectAllUser(page, limit);
+        PageInfo<MyUserInfo> pageInfo = userBizImpl.selectAllUser(page, limit);
         LayUiTable layUiTable = new LayUiTable();
         layUiTable.setCode(0);
         layUiTable.setMsg("返回消息");
@@ -49,7 +49,7 @@ public class UserController {
 
     @RequestMapping("/saveUser")
     @ResponseBody
-    public Object saveUser(User userInfo){
+    public Object saveUser(MyUserInfo userInfo){
         int i = userBizImpl.insertSelective(userInfo);
         Map map= new HashMap<>();
         if(i>0){
@@ -69,7 +69,7 @@ public class UserController {
      */
     @RequestMapping("/editUser")
     @ResponseBody
-    public Object editUser(User userInfo){
+    public Object editUser(MyUserInfo userInfo){
         int i = userBizImpl.updateByPrimaryKeySelective(userInfo);
         Map map= new HashMap<>();
         if(i>0){

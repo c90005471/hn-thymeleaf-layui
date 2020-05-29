@@ -28,11 +28,7 @@ public class TreeUtils
         for (Menu menu : list) {
             // 一、根据传入的某个父节点ID,遍历该父节点的所有子节点
             if(menu.getParentId()==parentId){
-                //构造tree对象
-                LayUiTree tree= new LayUiTree();
-                tree.setId(menu.getMenuId());
-                tree.setTitle(menu.getMenuName());
-                tree.setChecked(false);
+                LayUiTree tree = fromMenuToTree(menu);
                 //开始递归，把所有菜单和当前菜单放入
                 recursionFn(list, tree);
                 returnList.add(tree);
@@ -77,13 +73,10 @@ public class TreeUtils
         Iterator<Menu> it = list.iterator();
         while (it.hasNext())
         {
-            Menu n = (Menu) it.next();
-            if (n.getParentId() == t.getId())
+            Menu menu = (Menu) it.next();
+            if (menu.getParentId() == t.getId())
             {
-                LayUiTree tree= new LayUiTree();
-                tree.setId(n.getMenuId());
-                tree.setTitle(n.getMenuName());
-                tree.setChecked(false);
+                LayUiTree tree = fromMenuToTree(menu);
                 tlist.add(tree);
             }
         }
@@ -104,6 +97,21 @@ public class TreeUtils
         {
             return false;
         }
+    }
+
+    /**
+     * 将menu对象转换成tree对象
+     * @param menu
+     * @return
+     */
+    private static LayUiTree fromMenuToTree(Menu menu){
+        //构造tree对象
+        LayUiTree tree= new LayUiTree();
+        tree.setId(menu.getMenuId());
+        tree.setTitle(menu.getMenuName());
+        tree.setChecked(false);
+        tree.setUrl(menu.getUrl());
+        return tree;
     }
 
 }

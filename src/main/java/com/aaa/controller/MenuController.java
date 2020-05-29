@@ -15,6 +15,7 @@ import java.util.List;
  * @Version 1.0
  */
 @Controller
+@RequestMapping("/menu")
 public class MenuController {
     @Autowired
     private MenuBiz menuBiz;
@@ -22,35 +23,10 @@ public class MenuController {
     public String toShowMenu() {
         return "menu/showMenu";
     }
-    @RequestMapping("/toShowMenu2")
-    public String toShowMenu2() {
-        return "menu/showMenu2";
-    }
-    @RequestMapping("/toShowMenuTree")
-    public String showMenuTree() {
-        return "menu/showMenuTree";
-    }
-    @RequestMapping("/toShowMenuTree2")
-    public String showMenuTree2() {
-        return "menu/showMenuTree2";
-    }
-
     @RequestMapping("/selectAllMenu")
     @ResponseBody
     public List<LayUiTree> selectAllMenu(){
         List<LayUiTree> layUiTrees = menuBiz.selectAllMenu();
         return layUiTrees;
     }
-/*
-    @RequestMapping("/selectAllMenu")
-    @ResponseBody
-    public LayUiTree selectAllMenu(){
-        List<LayUiTree> layUiTrees = menuBiz.selectAllMenu();
-        LayUiTree layUiTree= new LayUiTree();
-        layUiTree.setId(0);
-        layUiTree.setTitle("总目录");
-        layUiTree.setChildren(layUiTrees);
-        return layUiTree;
-    }
-*/
 }

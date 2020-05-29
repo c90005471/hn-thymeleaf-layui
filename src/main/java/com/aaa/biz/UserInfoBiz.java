@@ -1,7 +1,6 @@
 package com.aaa.biz;
 
 import com.aaa.entity.MyUserInfo;
-import com.aaa.entity.User;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -12,11 +11,11 @@ import java.util.List;
  * @Version 1.0
  * 用户相关的业务方法
  */
-public interface UserBiz {
+public interface UserInfoBiz {
 
-    PageInfo<User> selectAllUser(int page, int limit);
-    User selectUserByUsername(String username);
-    int insertSelective(User record);
+    PageInfo<MyUserInfo> selectAllUser(int page, int limit);
+    MyUserInfo selectUserByUsername(String username);
+    int insertSelective(MyUserInfo record);
     int delUserByID(List<String> ids);
-    int updateByPrimaryKeySelective(User record);
+    int updateByPrimaryKeySelective(MyUserInfo record);
 }

@@ -22,4 +22,5 @@ public interface MenuMapper {
     int updateByPrimaryKey(Menu record);
 
     List<Menu> selectAllMenu();
+    List<Menu>  selectAllMenuByName(String loginName);
 }

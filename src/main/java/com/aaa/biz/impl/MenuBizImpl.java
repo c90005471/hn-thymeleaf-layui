@@ -60,4 +60,12 @@ public class MenuBizImpl implements MenuBiz {
         //并组装成tree格式的
         return TreeUtils.getChildPerms(menus, 0);
     }
+
+    @Override
+    public List<LayUiTree> selectAllMenuByName(String loginName) {
+        //查询所有的菜单
+        List<Menu> menus = menuMapper.selectAllMenuByName(loginName);
+        //并组装成tree格式的
+        return TreeUtils.getChildPerms(menus, 0);
+    }
 }

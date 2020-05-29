@@ -16,7 +16,6 @@
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
     <a class="layui-btn  layui-btn-normal layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="resetPassword">重置密码</a>
 </script>
 <form class="layui-form" action="" id="userSaveForm" style="display: none">
     <div class="layui-form-item">
@@ -64,18 +63,14 @@
        var myTable= table.render({
             elem: '#demo'
             ,height: 350
-            ,url: 'showUser' //数据接口
-            ,page: true //开启分页
-            ,limit:6
-            ,limits:[5,10,15,20,25,30]
+            ,url: 'showRole' //数据接口
             ,toolbar: '#mytoolbar' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
             ,cols: [
                 [ //表头
-                {field: 'userId', title: '用户编号', width:80, sort: true, fixed: 'left',checkbox: true}
-                ,{field: 'loginName', title: '登录名', width:120, sort: true, fixed: 'left'}
-                ,{field: 'userName', title: '真实姓名', width:120}
-                ,{field: 'email', title: '邮箱', width:180}
-                ,{field: 'phonenumber', title: '手机号', width:120}
+                {field: 'roleId', title: '角色编号', width:80, sort: true, fixed: 'left',checkbox: true}
+                ,{field: 'roleName', title: '角色名称', width:120, sort: true, fixed: 'left'}
+                ,{field: 'roleKey', title: '权限字符', width:120}
+                ,{field: 'roleSort', title: '显示顺序', width:180}
                 ,{field: 'status', title: '状态', width:50}
                 ,{field: 'createTime', title: '创建时间', width:200}
                 ,{ title: '操作', width:200, toolbar: '#barDemo'}

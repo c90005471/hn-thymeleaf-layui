@@ -18,4 +18,6 @@ public interface MenuBiz {
     int updateByPrimaryKey(Menu record);
 
     List<LayUiTree>  selectAllMenu();
+    //根据用户登录名查询对应的所有菜单
+    List<LayUiTree>  selectAllMenuByName(String loginName);
 }

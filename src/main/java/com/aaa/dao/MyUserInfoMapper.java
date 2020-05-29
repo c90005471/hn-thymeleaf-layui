@@ -11,17 +11,12 @@ import java.util.List;
 @Repository
 public interface MyUserInfoMapper {
     int deleteByPrimaryKey(Integer userid);
-
     int insert(MyUserInfo record);
-
     int insertSelective(MyUserInfo record);
-
     MyUserInfo selectByPrimaryKey(Integer userid);
-    List<MyUserInfo> selectAllUser();
-
     int updateByPrimaryKeySelective(MyUserInfo record);
-
     int updateByPrimaryKey(MyUserInfo record);
     MyUserInfo selectUserByUsername(String username);
     int delUserByID( @Param("ids") List<String> ids);
+    List<MyUserInfo> selectAllUser();
 }
