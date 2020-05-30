@@ -30,7 +30,7 @@
     from tbl_user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
-    <select id="selectUserByUsername" resultType="com.aaa.entity.User">
+    <select id="selectUserByUsername" resultMap="BaseResultMap">
         select * from tbl_user where login_name=#{loginName}
     </select>
   <select id="selectAllUser" resultMap="BaseResultMap">

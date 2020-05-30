@@ -69,4 +69,13 @@ public class LoginController {
         subject.logout();
         return "login";
     }
+    /**
+     * 注销
+     * @return
+     */
+    @RequestMapping("/toUnau")
+    public String toUnau(){
+        System.out.println("没有权限！！！！");
+        return "unau";
+    }
 }

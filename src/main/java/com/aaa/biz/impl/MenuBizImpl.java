@@ -8,7 +8,9 @@ import com.aaa.util.TreeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Author: 陈建
@@ -19,6 +21,7 @@ import java.util.List;
 public class MenuBizImpl implements MenuBiz {
     @Autowired
     private MenuMapper menuMapper;
+
     @Override
     public int deleteByPrimaryKey(Integer menuId) {
         return 0;
@@ -51,6 +54,7 @@ public class MenuBizImpl implements MenuBiz {
 
     /**
      * 查询所有的菜单，并组装成tree格式的
+     *
      * @return
      */
     @Override
@@ -67,5 +71,25 @@ public class MenuBizImpl implements MenuBiz {
         List<Menu> menus = menuMapper.selectAllMenuByName(loginName);
         //并组装成tree格式的
         return TreeUtils.getChildPerms(menus, 0);
+    }
+
+    /**
+     * 根据登陆用户名查询所有的权限
+     *
+     * @param loginName
+     * @return
+     */
+    @Override
+    public Set<String> selectAllPermsByName(String loginName) {
+        //查询所有的菜单
+        List<Menu> menus = menuMapper.selectAllMenuByName(loginName);
+        Set<String> perms = new HashSet<String>();
+        for (Menu menu : menus) {
+            String perm = menu.getPerms();
+            if (null != perm&&perm.length()>0) {
+                perms.add(perm);
+            }
+        }
+        return perms;
     }
 }

@@ -1,10 +1,13 @@
 package com.aaa.shiro;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.aaa.util.MyConstants;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -60,11 +63,21 @@ public class ShiroConfig {
         Map<String, String> map = new LinkedHashMap<>();
         //放行login
         map.put("/login","anon");
+        map.put("/css/**","anon");
+        map.put("/img/**","anon");
+        map.put("/js/**","anon");
+        map.put("/json/**","anon");
+        map.put("/layui/**","anon");
+
         //过滤所有的请求
-        map.put("/*","authc");
+        map.put("/**","authc");
+        //授权页面
+       /* map.put("/user/toShowUser","perms[system:user:view]");*/
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         //修改登录页面，所有的未认证的请求都给我滚，滚去登录
         shiroFilterFactoryBean.setLoginUrl("/toLogin");
+        //指定未授权页面
+        shiroFilterFactoryBean.setUnauthorizedUrl("/toUnau");
         return shiroFilterFactoryBean;
     }
     /**
@@ -78,5 +91,34 @@ public class ShiroConfig {
         //加密1000次
         credentialsMatcher.setHashIterations(MyConstants.hashIterations);
         return credentialsMatcher;
+    }
+    /**
+     * 设置shiro的方言
+     * @return
+     */
+    @Bean
+    public ShiroDialect shiroDialect(){
+        return new ShiroDialect();
+    }
+    /**
+     * 开启Shiro注解(如@RequiresRoles,@RequiresPermissions),
+     * 需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证
+     * 配置以下两个bean(DefaultAdvisorAutoProxyCreator和AuthorizationAttributeSourceAdvisor)
+     */
+    @Bean
+    public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator(){
+        DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+        advisorAutoProxyCreator.setProxyTargetClass(true);
+        return advisorAutoProxyCreator;
+    }
+
+    /**
+     * 开启aop注解支持
+     */
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor() {
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(defaultWebSecurityManager());
+        return authorizationAttributeSourceAdvisor;
     }
 }

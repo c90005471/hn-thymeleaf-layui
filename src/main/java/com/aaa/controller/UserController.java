@@ -7,6 +7,7 @@ import com.aaa.entity.User;
 import com.aaa.util.MyConstants;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ public class UserController {
     private UserBiz userBizImpl;
 
     @RequestMapping("/toShowUser")
+    @RequiresPermissions("system:user:view")
     public String toShowUserLayui() {
         return "user/showUser";
     }
