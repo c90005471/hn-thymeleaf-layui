@@ -29,74 +29,31 @@ public class TreeUtils
             // 一、根据传入的某个父节点ID,遍历该父节点的所有子节点
             if(menu.getParentId()==parentId){
                 LayUiTree tree = fromMenuToTree(menu);
-                //开始递归，把所有菜单和当前菜单放入
-                recursionFn(list, tree);
-                returnList.add(tree);
+                //开始递归，把当前菜单和所有菜单放入递归，给当前的tree找孩子
+                LayUiTree layUiTree = recursionFn(tree, list);
+                returnList.add(layUiTree);
             }
         }
         return returnList;
     }
 
     /**
-     * 递归列表
-     * 
+     * 递归调用，给每一个tree配上自己的孩子
+     * @param layUiTree
      * @param list
-     * @param t
+     * @return
      */
-    private static void recursionFn(List<Menu> list, LayUiTree t)
+    private static LayUiTree recursionFn(LayUiTree layUiTree,List<Menu> list)
     {
-        // 得到t的子节点列表
-        List<LayUiTree> childList = getChildList(list, t);
-        t.setChildren(childList);
-        for (LayUiTree tChild : childList)
-        {
-            if (hasChild(list, tChild))
-            {
-                // 判断是否有子节点
-                Iterator<LayUiTree> it = childList.iterator();
-                while (it.hasNext())
-                {
-                    LayUiTree n =  it.next();
-                    recursionFn(list, n);
-                }
+        List<LayUiTree> childNodes = new ArrayList<>();
+        for (Menu node : list) {
+            if (node.getParentId().equals(layUiTree.getId())) {
+                LayUiTree tree = fromMenuToTree(node);
+                childNodes.add(recursionFn(tree, list));
             }
         }
-    }
-
-    /**
-     * 得到子节点列表
-     */
-    private static List<LayUiTree> getChildList(List<Menu> list, LayUiTree t)
-    {
-
-        List<LayUiTree> tlist = new ArrayList<LayUiTree>();
-        Iterator<Menu> it = list.iterator();
-        while (it.hasNext())
-        {
-            Menu menu = (Menu) it.next();
-            if (menu.getParentId() == t.getId())
-            {
-                LayUiTree tree = fromMenuToTree(menu);
-                tlist.add(tree);
-            }
-        }
-        return tlist;
-    }
-
-
-/**
-     * 判断是否有子节点
-     */
-
-    private static boolean hasChild(List<Menu> list, LayUiTree t)
-    {
-        int size = getChildList(list, t).size();
-        if(size>0){
-            return true;
-        }else
-        {
-            return false;
-        }
+        layUiTree.setChildren(childNodes);
+        return layUiTree;
     }
 
     /**
