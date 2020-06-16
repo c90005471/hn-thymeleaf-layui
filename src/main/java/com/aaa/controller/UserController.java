@@ -48,6 +48,20 @@ public class UserController {
         layUiTable.setData(pageInfo.getList());
         return layUiTable;
     }
+    @RequestMapping("/showUserSearch")
+    @ResponseBody
+    public LayUiTable showUserSearch(int page, int limit,String searchLoginName) {
+        System.out.println(searchLoginName);
+        //开始查询
+        PageInfo<User> pageInfo = userBizImpl.selectAllUser(page, limit);
+        LayUiTable layUiTable = new LayUiTable();
+        layUiTable.setCode(0);
+        layUiTable.setMsg("返回消息");
+        //设置分页之后的返回值
+        layUiTable.setCount(pageInfo.getTotal());
+        layUiTable.setData(pageInfo.getList());
+        return layUiTable;
+    }
 
     @RequestMapping("/saveUser")
     @ResponseBody
